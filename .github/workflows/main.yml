@@ -20,7 +20,7 @@ jobs:
     name: Run Unit Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
  
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -38,7 +38,7 @@ jobs:
           php artisan key:generate
  
       - name: Run tests
-        run: php artisan test    
+        run: php artisan test -vvv    
 
       - name: Code Formating
         run: php ./vendor/bin/pint --config pint.json
