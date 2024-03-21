@@ -21,12 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: php-actions/phpstan@v3
-        with:
-          path: app tests
-          configuration: phpstan.neon
-
- 
+       
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -54,7 +49,10 @@ jobs:
         run: php artisan test 
 
       - name: PHPStan Analysis
-        run: ./vendor/bin/phpstan analyse -c phpstan.neon 
+        uses: php-actions/phpstan@v3
+        with:
+          path: app/ tests/
+          configuration: /phpstan.neon
 
       - name: Code Formating
         run: php ./vendor/bin/pint --config pint.json
