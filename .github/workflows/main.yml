@@ -52,7 +52,6 @@ jobs:
         uses: php-actions/phpstan@v3
         with:
           path: app/ tests/
-          configuration: /phpstan.neon
 
       - name: Code Formating
         run: php ./vendor/bin/pint --config pint.json
