@@ -46,7 +46,7 @@ jobs:
           php artisan key:generate
  
       - name: Run tests
-        run: php artisan test -vvv    
+        run: php artisan test 
 
       - name: Code Formating
         run: php ./vendor/bin/pint --config pint.json
