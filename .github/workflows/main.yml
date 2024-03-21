@@ -27,10 +27,18 @@ jobs:
         with:
           php-version: '8.2'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
           coverage: none
 
       - name: Run composer install
         run: composer install -n --prefer-dist
+
+      - name: Install NPM dependencies
+        run: npm i
+
+      - name: Compile assets
+        run: npm run build
  
       - name: Prepare Laravel Application
         run: |
