@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
- 
+       
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -47,6 +47,11 @@ jobs:
  
       - name: Run tests
         run: php artisan test 
+
+      - name: PHPStan Analysis
+        uses: php-actions/phpstan@v3
+        with:
+          path: app/ tests/
 
       - name: Code Formating
         run: php ./vendor/bin/pint --config pint.json
