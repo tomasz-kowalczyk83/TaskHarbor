@@ -55,6 +55,9 @@
         ],
         "scribe": [
             "@php artisan scribe:generate"
+        ],
+        "pint": [
+            "./vendor/bin/pint"
         ]
     },
     "scripts-descriptions": {
