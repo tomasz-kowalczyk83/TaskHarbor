@@ -54,9 +54,6 @@
             "./vendor/bin/phpstan analyse"
         ]
     },
-    "scripts-descriptions": {
-        "phpstan": "Run PHPStan static analysis against your application."
-    },
     "extra": {
         "laravel": {
             "dont-discover": []
