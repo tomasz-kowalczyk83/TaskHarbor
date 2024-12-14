@@ -54,4 +54,4 @@ jobs:
           path: app/ tests/
 
       - name: Code Formating
-        run: php ./vendor/bin/pint --config pint.json
+        run: php ./vendor/bin/pint --config pint.json --test
