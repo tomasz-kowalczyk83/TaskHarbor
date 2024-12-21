@@ -10,7 +10,7 @@ Project based around idea of a hub for people to improve their wellbeing. Whethe
 ### List of potential hubs:
  - Tasks - hub where one can set various types of goals and track them, daily, weekly quaterly or yearly. Regular reccuring or singular goals and tasks.
 
- - Books - classic bookshelf app to find book recommendations and to manage own virtual bookshelf.  
+ - Books - classic bookshelf app to find book recommendations and to manage own virtual bookshelf.
 
  - Fittness 
 
@@ -18,6 +18,29 @@ Project based around idea of a hub for people to improve their wellbeing. Whethe
 
  - Notes
 
+### Features
+- Bookshelf
+  - 3rd party api to search and pull book info
+  - 3rd party api to fetch reviews and rating
+  - 3rd party api to fetch cliff notes 
+- Notes 
+   - To be able to create standalone notes similarly to notebooklm
+   - To be able to add notes to other resources (books, tasks etc)
+- Tags
+  - To be able to create and manage tags and categories and tag resources.
+
+### Other
+- To use conventional commits and semantic versioning
+  - enforce conventional commits in the pipeline 
+- Generate the api documentation automatically using Scribe or Scramble packages 
+- Cover the project with various level and type of testing including:
+  - unit
+  - feature
+  - api
+  - behavioural
+  - performance?
+  - chaos?
+- To consume other apis 
 
 Old TaskHarbor theme 
 theme Links: 
