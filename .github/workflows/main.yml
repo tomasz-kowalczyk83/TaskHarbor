@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-       
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -37,16 +37,19 @@ jobs:
       - name: Install NPM dependencies
         run: npm i
 
+      - name: Lint commits
+        run: npx commitlint --from=HEAD~20 --to=HEAD
+
       - name: Compile assets
         run: npm run build
- 
+
       - name: Prepare Laravel Application
         run: |
           cp .env.ci .env
           php artisan key:generate
- 
+
       - name: Run tests
-        run: php artisan test 
+        run: php artisan test
 
       - name: PHPStan Analysis
         uses: php-actions/phpstan@v3
