@@ -4,9 +4,6 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -15,7 +12,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
   commit-lint:
     runs-on: ubuntu-latest
     steps:
@@ -27,6 +23,7 @@ jobs:
 
       - name: Lint commits
         run: git log origin/main..HEAD --pretty=format:"%s" | npx commitlint
+
 
   tests:
     name: Run Unit Tests
@@ -68,23 +65,3 @@ jobs:
 
       - name: Code Formating
         run: php ./vendor/bin/pint --config pint.json --test
-
-  release:
-    needs: tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 21
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Generate release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
