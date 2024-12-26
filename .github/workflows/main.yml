@@ -19,11 +19,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm install commitlint @commitlint/config-conventional --save-dev
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 21
 
-      - name: Lint commits
-        run: git log origin/main..HEAD --pretty=format:"%s" | npx commitlint
+      - name: Lint Pull Request Title
+        run: |
+          echo "${{ github.event.pull_request.title }}" | npx commitlint || exit 1
 
 
   tests:
