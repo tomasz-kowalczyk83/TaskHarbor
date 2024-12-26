@@ -24,6 +24,9 @@ jobs:
         with:
           node-version: 21
 
+      - name: Install npm packages
+        run: npm install
+
       - name: Lint Pull Request Title
         run: |
           echo "${{ github.event.pull_request.title }}" | npx commitlint || exit 1
