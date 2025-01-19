@@ -68,6 +68,7 @@ jobs:
       - name: PHPStan Analysis
         uses: php-actions/phpstan@v3
         with:
+          configuration: phpstan.neon
           path: app/ tests/
 
       - name: Code Formating
