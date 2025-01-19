@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Fortify\Features;
