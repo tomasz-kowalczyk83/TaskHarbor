@@ -4,24 +4,41 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+    types: [opened, synchronize, edited, reopened, ready_for_review]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  commit-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 21
+
+      - name: Install npm packages
+        run: npm install
+
+      - name: Lint Pull Request Title
+        run: |
+          echo "${{ github.event.pull_request.title }}" | npx commitlint || exit 1
+
 
   tests:
     name: Run Unit Tests
+    needs: commit-lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
- 
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -39,14 +56,19 @@ jobs:
 
       - name: Compile assets
         run: npm run build
- 
+
       - name: Prepare Laravel Application
         run: |
           cp .env.ci .env
           php artisan key:generate
- 
+
       - name: Run tests
-        run: php artisan test 
+        run: php artisan test
+
+      - name: PHPStan Analysis
+        uses: php-actions/phpstan@v3
+        with:
+          path: app/ tests/
 
       - name: Code Formating
-        run: php ./vendor/bin/pint --config pint.json
+        run: php ./vendor/bin/pint --config pint.json --test
